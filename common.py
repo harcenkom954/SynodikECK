@@ -5,7 +5,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 # from stats import add_usage
 import asyncio
 import os
-import tempfile
 import time
 from utils import compute_sha1_from_file, compute_sha1_from_content
 
@@ -28,7 +27,6 @@ async def process_file(vector_store, file: UploadFile, loader_class, stats_db: O
         file_sha1 = compute_sha1_from_file(tmp_file.name)  # Ensure this function works with FastAPI
 
     os.remove(tmp_file.name)
-    chunk_size = 500
     chunk_overlap = 0
     
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
